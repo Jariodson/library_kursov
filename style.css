@@ -1,0 +1,113 @@
+body {
+    background-color: wheat;
+    color: black;
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.topmenu {
+    backface-visibility: hidden;
+    margin: 0;
+    text-align: right;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+.topmenu>li {
+    display: inline-block;
+    position: relative;
+}
+
+.topmenu>li>a {
+    text-decoration: none;
+    font-family: 'Exo 2', sans-serif;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    font-weight: bolder;
+    color: #003559;
+    text-transform: uppercase;
+}
+#welcome:hover{
+    color: #E6855F;
+    transition: .2s ease-in-out;
+}
+#head{
+    margin-bottom: 25px;
+}
+header {
+    text-align: center;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+header a {
+    text-decoration: none;
+    outline: none;
+    transition: .3s ease-in-out;
+    margin: 0 auto;
+}
+.logo {
+    color: #8B0000;
+    font-family: 'Candara', serif;
+    font-size: 2.5em;
+    padding-bottom: 0;
+}
+nav {
+    display: table;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 7px;
+    display: flex;
+}
+
+.menu {
+    border-bottom: 1px solid black;
+}
+
+.menu>li {
+    float: left;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.menu>li>a {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    color: #404040;
+    padding: 15px 30px;
+}
+
+.menu li a:hover {
+    color: #D5B45B;
+    padding: 0 40px;
+}
+#main{
+    color: black;
+    padding: 0 150px;
+    padding-bottom: 100px;
+    margin-top: 50px;
+}
+.inf{
+    padding: 0 20px;
+    font-size: larger;
+}
+.inf p{
+    margin: 5px;
+    color: grey;
+}
+#reg{
+    text-align: center;
+}
+#reg > h2{
+    color: #8B0000;;
+}
+#main table,td, th{
+    border: 2px solid black;
+}

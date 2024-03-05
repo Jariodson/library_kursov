@@ -1,0 +1,70 @@
+CREATE USER 'user'@'localhost' IDENTIFIED VIA mysql_native_password USING '***';GRANT SELECT, CREATE USER ON *.* TO 'user'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `kursov`.* TO 'user'@'localhost';
+
+$_SESSION['login'] = $_GET['login'];
+            if ($_GET['password0'] == $_GET['password1']) {
+                $_SESSION['password'] = $_GET['password0'];
+            } else {
+                echo "Пароли не совпадают!";
+            }
+            header("Location: main.php");
+            $conn = new mysqli("localhost", "root", "", "kursov");
+            if ($conn->connect_error) {
+                die("Ошибка: " . $conn->connect_error);
+            }
+            $login = $conn->real_escape_string($_GET["login"]);
+            $password = $conn->real_escape_string($_GET["password0"]);
+            $sql = "INSERT INTO users (login, password) VALUES ('$login', '$password')";
+            if ($conn->query($sql)) {
+                echo "Данные успешно добавлены";
+            } else {
+                echo "Ошибка: " . $conn->error;
+            }
+            $conn->close();
+///////////////////////////////////////////////////////////////////
+
+// установка соединения с базой данных
+            $servername = "localhost";
+            $login = "root";
+            $password = "";
+            $dbname = "kursov";
+            $conn = mysqli_connect($servername, $login, $password, $dbname);
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            echo "Успешное подлючение к бд!";
+            // проверка логина и пароля
+            if (isset($_POST['submit'])) {
+                if (!empty($_POST['login']) && !empty($_POST['password0'] && !empty($_POST['password1']))) {
+                    $login = $_POST['login$login'];
+                    $_SESSION['login'] = $_POST['login'];
+                    if ($_POST['password0'] == $_POST['password1']) {
+                        $_SESSION['password'] = $_POST['password0'];
+                        $password = $_POST['password1'];
+                    } else {
+                        echo "Пароли не совпадают!";
+                    }
+                    $query = "SELECT * FROM users WHERE login$login='$login' AND password='$password'";
+                    $result = mysqli_query($conn, $query);
+                    if (mysqli_num_rows($result) == 1) {
+                        // выдача роли пользователю
+                        $row = mysqli_fetch_assoc($result);
+                        $role = $row['role'];
+                        if ($role == "admin") {
+                            // пользователь с ролью "администратор"
+                            echo "Вы вошли как администратор";
+                        } else {
+                            // пользователь с другой ролью
+                            echo "Вы вошли с ролью: " . $role;
+                        }
+                    } else {
+                        // сообщение об ошибке
+                        echo "Неверное имя пользователя или пароль!";
+                    }
+                } else {
+                    // сообщение об ошибке
+                    echo "Введите имя пользователя и пароль!";
+                }
+            }
+
+            mysqli_close($conn); // закрытие соединения с базой данных
+        }
